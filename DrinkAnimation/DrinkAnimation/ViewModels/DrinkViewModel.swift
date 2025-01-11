@@ -19,6 +19,13 @@ class DrinkViewModel: ObservableObject {
             isAnimating = true
         }
         SoundManager.shared.playSound("fill")
+        SoundManager.shared.playSound("bubbles", loop: true) // Play bubble sound
+        
+        // Stop the sounds after 2 seconds (animation duration)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            SoundManager.shared.stopSound("fill")
+            SoundManager.shared.stopSound("bubbles")
+        }
     }
     
     func reset() {

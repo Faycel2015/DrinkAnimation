@@ -21,11 +21,17 @@ class SoundManager {
         try? AVAudioSession.sharedInstance().setActive(true)
     }
     
-    func playSound(_ name: String) {
-        guard let url = Bundle.main.url(forResource: name, withExtension: "mp3") else { return }
+    func playSound(_ name: String, loop: Bool = false) {
+        guard let url = Bundle.main.url(forResource: name, withExtension: "mp3") else {
+            print("Sound file \(name).mp3 not found")
+            return
+        }
         
         if let player = try? AVAudioPlayer(contentsOf: url) {
             audioPlayers[name] = player
+            if loop {
+                player.numberOfLoops = -1 // Loop indefinitely
+            }
             player.play()
         }
     }

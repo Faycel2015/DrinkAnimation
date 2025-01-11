@@ -15,7 +15,7 @@ struct CupView: View {
                 let width = geometry.size.width
                 let height = geometry.size.height
                 
-                // Cup shape
+                // Cup shape (right side up)
                 path.move(to: CGPoint(x: width * 0.1, y: height))
                 path.addLine(to: CGPoint(x: width * 0.2, y: height * 0.1))
                 path.addLine(to: CGPoint(x: width * 0.8, y: height * 0.1))
