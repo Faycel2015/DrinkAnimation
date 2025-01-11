@@ -18,6 +18,7 @@ class DrinkViewModel: ObservableObject {
             fillLevel = 1
             isAnimating = true
         }
+        SoundManager.shared.playSound("fill")
     }
     
     func reset() {
@@ -25,5 +26,6 @@ class DrinkViewModel: ObservableObject {
             fillLevel = 0
             isAnimating = false
         }
+        SoundManager.shared.playSound("reset")
     }
 }
