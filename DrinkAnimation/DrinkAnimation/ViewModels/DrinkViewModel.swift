@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 class DrinkViewModel: ObservableObject {
+    @Published var drink = Drink(fillLevel: 0.5, temperature: 0.3, color: .blue)
     @Published var fillLevel: CGFloat = 0
     @Published var isAnimating = false
     @Published var color: Color = .blue
@@ -34,5 +35,17 @@ class DrinkViewModel: ObservableObject {
             isAnimating = false
         }
         SoundManager.shared.playSound("reset")
+    }
+    
+    func updateFillLevel(_ value: Double) {
+        drink.fillLevel = max(0, min(1, value))
+    }
+    
+    func updateTemperature(_ value: Double) {
+        drink.temperature = max(0, min(1, value))
+    }
+    
+    func updateColor(_ color: Color) {
+        drink.color = color
     }
 }

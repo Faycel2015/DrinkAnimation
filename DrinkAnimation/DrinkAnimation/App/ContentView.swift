@@ -11,6 +11,13 @@ struct ContentView: View {
     @StateObject private var viewModel = DrinkViewModel()
     
     var body: some View {
+        NavigationView {
+            VStack {
+                NavigationLink("Play Game", destination: DrinkAnimationView())
+                NavigationLink("Shop", destination: ShopView())
+            }
+            .navigationTitle("Drink Animation")
+        }
         ZStack {
             Color.gray.opacity(0.1)
                 .ignoresSafeArea()

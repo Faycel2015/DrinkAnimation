@@ -12,6 +12,8 @@ struct DrinkAnimationApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(DrinkViewModel())
+                .environmentObject(GameViewModel())
         }
     }
 }
