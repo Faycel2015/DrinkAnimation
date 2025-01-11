@@ -13,7 +13,8 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                NavigationLink("Play Game", destination: DrinkAnimationView())
+                Text(NSLocalizedString("welcome_message", comment: ""))
+                NavigationLink(NSLocalizedString("play_button", comment: ""), destination: DrinkAnimationView())
                 NavigationLink("Shop", destination: ShopView())
             }
             .navigationTitle("Drink Animation")

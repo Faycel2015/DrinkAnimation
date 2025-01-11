@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings (English).strings
+  DrinkAnimation
+
+  Created by FayTek on 1/11/25.
+  
+*/
+"welcome_message" = "Welcome to Drink Animation!";
+"play_button" = "Play";
