@@ -5,7 +5,6 @@
 //  Created by FayTek on 1/11/25.
 //
 
-import Foundation
 import SwiftUI
 
 struct DrinkAnimationView: View {
@@ -15,17 +14,21 @@ struct DrinkAnimationView: View {
         VStack {
             ZStack {
                 CupView()
-                WaterView(fillLevel: $viewModel.drink.fillLevel, color: viewModel.drink.color)
-                    .mask(CupView()) // Use the cup as a mask
+                WaterView(fillLevel: .constant(CGFloat(viewModel.drink.fillLevel)), color: viewModel.drink.color)
+                    .mask(CupView())
+                BubblesView()
+                LiquidSplashView()
             }
             .frame(width: 200, height: 300)
+            .transition(.scale)
             
             Slider(value: $viewModel.drink.fillLevel, in: 0...1)
                 .padding()
             
-            ColorPicker("Drink Color", selection: $viewModel.drink.color)
+            ColorPickerView(selectedColor: $viewModel.drink.color)
                 .padding()
         }
         .padding()
+        .animation(.spring(), value: viewModel.drink.fillLevel)
     }
 }

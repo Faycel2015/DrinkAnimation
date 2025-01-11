@@ -8,62 +8,68 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var viewModel = DrinkViewModel()
+    @StateObject private var drinkViewModel = DrinkViewModel()
+    @EnvironmentObject var gameViewModel: GameViewModel
+    @EnvironmentObject var purchaseManager: PurchaseManager
     
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(spacing: 20) {
+                // Welcome Message
                 Text(NSLocalizedString("welcome_message", comment: ""))
-                NavigationLink(NSLocalizedString("play_button", comment: ""), destination: DrinkAnimationView())
-                NavigationLink("Shop", destination: ShopView())
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 40)
+                
+                Spacer()
+                
+                // Play Button
+                NavigationLink(destination: DrinkAnimationView()) {
+                    ActionButton(title: NSLocalizedString("play_button", comment: "")) {
+                        // Define the action for the Play button
+                        print("Play button tapped!")
+                    }
+                
+                // Shop Button
+                NavigationLink(destination: ShopView()) {
+                    ActionButton(title: "Shop", action: () -> Void)
+                }
+                
+                // Leaderboard Button
+                NavigationLink(destination: LeaderboardView()) {
+                    ActionButton(title: "Leaderboard")
+                }
+                
+                // Achievements Button
+                NavigationLink(destination: AchievementsView()) {
+                    ActionButton(title: "Achievements")
+                }
+                
+                Spacer()
+                
+                // Display Current Score
+                Text("Your Score: \(gameViewModel.score)")
+                    .font(.headline)
+                    .padding(.bottom, 20)
             }
+            .padding()
             .navigationTitle("Drink Animation")
+            .background(
+                LinearGradient(
+                    gradient: Gradient(colors: [Color.blue.opacity(0.2), Color.purple.opacity(0.2)]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .edgesIgnoringSafeArea(.all)
+            )
         }
-        ZStack {
-            Color.gray.opacity(0.1)
-                .ignoresSafeArea()
-            
-            VStack {
-                ZStack {
-                    CupView()
-                        .frame(width: 200, height: 300)
-                    
-                    WaterView(fillLevel: $viewModel.fillLevel, color: viewModel.color)
-                        .frame(width: 180, height: 280)
-                        .offset(y: 10)
-                    
-                    BubblesView()
-                        .frame(width: 180, height: 280)
-                        .offset(y: 10)
-                        .mask(
-                            Rectangle()
-                                .frame(height: 280 * viewModel.fillLevel)
-                                .frame(maxHeight: .infinity, alignment: .bottom)
-                        )
-                }
-                
-                ProgressBarView(progress: viewModel.fillLevel)
-                    .padding(.horizontal)
-                
-                HStack(spacing: 20) {
-                    Button("Start") {
-                        viewModel.startDrinking()
-                    }
-                    .buttonStyle(.bordered)
-                    
-                    Button("Reset") {
-                        viewModel.reset()
-                    }
-                    .buttonStyle(.bordered)
-                    
-                    ColorPicker("Color", selection: $viewModel.color)
-                }
-                .padding()
-            }
-        }
+        .environmentObject(drinkViewModel) // Inject DrinkViewModel
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(GameViewModel()) // Provide GameViewModel for preview
+        .environmentObject(PurchaseManager()) // Provide PurchaseManager for preview
 }

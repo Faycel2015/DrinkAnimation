@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct WaterView: View {
-    @Binding var fillLevel: CGFloat
+    @Binding var fillLevel: Double // Change to Double
     var color: Color
     
     var body: some View {
@@ -18,8 +18,9 @@ struct WaterView: View {
                 .fill(color)
                 .mask(
                     Rectangle()
-                        .frame(height: geometry.size.height * fillLevel)
+                        .frame(height: geometry.size.height * CGFloat(fillLevel))
                         .frame(maxHeight: .infinity, alignment: .bottom)
+                        .animation(.easeInOut, value: fillLevel)
                 )
         }
     }

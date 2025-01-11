@@ -5,19 +5,22 @@
 //  Created by FayTek on 1/11/25.
 //
 
-import Foundation
 import SwiftUI
+import StoreKit
 
 struct ShopView: View {
-    @EnvironmentObject var gameViewModel: GameViewModel
+    @EnvironmentObject var purchaseManager: PurchaseManager
     
     var body: some View {
-        List(gameViewModel.powerUps) { powerUp in
+        List(purchaseManager.products, id: \.productIdentifier) { product in
             VStack(alignment: .leading) {
-                Text(powerUp.name)
+                Text(product.localizedTitle)
                     .font(.headline)
-                Text(powerUp.effect)
+                Text(product.localizedDescription)
                     .font(.subheadline)
+                Button("Buy for \(product.price)") {
+                    purchaseManager.purchaseProduct(product)
+                }
             }
         }
         .navigationTitle("Shop")

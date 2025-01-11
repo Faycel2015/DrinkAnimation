@@ -5,7 +5,6 @@
 //  Created by FayTek on 1/11/25.
 //
 
-import Foundation
 import SwiftUI
 
 struct AchievementsView: View {

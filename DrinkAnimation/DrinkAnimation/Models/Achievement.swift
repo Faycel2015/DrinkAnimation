@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-struct Achievement {
+struct Achievement: Identifiable { // Conform to Identifiable
     let id: Int
     let title: String
     let description: String
-    let isUnlocked: Bool
+    var isUnlocked: Bool
 }
