@@ -5,47 +5,45 @@
 //  Created by FayTek on 1/11/25.
 //
 
-import Foundation
 import StoreKit
 
-class PurchaseManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
-    @Published var products: [SKProduct] = []
+@MainActor
+class PurchaseManager: ObservableObject {
+    @Published var products: [Product] = []
     @Published var purchasedProductIDs: Set<String> = []
     
-    override init() {
-        super.init()
-        SKPaymentQueue.default().add(self)
-        fetchProducts()
-    }
-    
-    func fetchProducts() {
-        let productIDs = Set(["com.yourapp.powerup1", "com.yourapp.powerup2"])
-        let request = SKProductsRequest(productIdentifiers: productIDs)
-        request.delegate = self
-        request.start()
-    }
-    
-    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        DispatchQueue.main.async {
-            self.products = response.products
+    init() {
+        Task {
+            await fetchProducts()
         }
     }
     
-    func purchaseProduct(_ product: SKProduct) {
-        let payment = SKPayment(product: product)
-        SKPaymentQueue.default().add(payment)
+    func fetchProducts() async {
+        do {
+            let products = try await Product.products(for: ["com.yourapp.powerup1", "com.yourapp.powerup2"])
+            self.products = products
+        } catch {
+            print("Failed to fetch products: \(error)")
+        }
     }
     
-    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        for transaction in transactions {
-            switch transaction.transactionState {
-            case .purchased:
-                purchasedProductIDs.insert(transaction.payment.productIdentifier)
-                SKPaymentQueue.default().finishTransaction(transaction)
-            case .failed, .restored, .deferred, .purchasing:
-                break
-            @unknown default:
-                break
+    func purchaseProduct(_ product: Product) {
+        Task {
+            do {
+                let result = try await product.purchase()
+                switch result {
+                case .success(let verification):
+                    if case .verified(let transaction) = verification {
+                        self.purchasedProductIDs.insert(transaction.productID)
+                        await transaction.finish()
+                    }
+                case .pending, .userCancelled:
+                    break
+                @unknown default:
+                    break
+                }
+            } catch {
+                print("Failed to purchase product: \(error)")
             }
         }
     }

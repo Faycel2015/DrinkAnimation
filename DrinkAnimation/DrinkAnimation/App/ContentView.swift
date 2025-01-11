@@ -16,7 +16,7 @@ struct ContentView: View {
         NavigationView {
             VStack(spacing: 20) {
                 // Welcome Message
-                Text(NSLocalizedString("welcome_message", comment: ""))
+                Text(NSLocalizedString("welcome_message", value: "Welcome to Drink Animation!", comment: ""))
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)
@@ -26,50 +26,65 @@ struct ContentView: View {
                 
                 // Play Button
                 NavigationLink(destination: DrinkAnimationView()) {
-                    ActionButton(title: NSLocalizedString("play_button", comment: "")) {
-                        // Define the action for the Play button
-                        print("Play button tapped!")
-                    }
+                    Text(NSLocalizedString("play_button", value: "Play", comment: ""))
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
                 
                 // Shop Button
                 NavigationLink(destination: ShopView()) {
-                    ActionButton(title: "Shop", action: () -> Void)
+                    Text(NSLocalizedString("shop_button", value: "Shop", comment: ""))
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
                 }
                 
                 // Leaderboard Button
                 NavigationLink(destination: LeaderboardView()) {
-                    ActionButton(title: "Leaderboard")
+                    Text(NSLocalizedString("leaderboard_button", value: "Leaderboard", comment: ""))
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
                 }
                 
                 // Achievements Button
                 NavigationLink(destination: AchievementsView()) {
-                    ActionButton(title: "Achievements")
+                    Text(NSLocalizedString("achievements_button", value: "Achievements", comment: ""))
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
                 }
                 
                 Spacer()
                 
                 // Display Current Score
-                Text("Your Score: \(gameViewModel.score)")
+                Text("Your Score: \(0)")
                     .font(.headline)
                     .padding(.bottom, 20)
             }
             .padding()
             .navigationTitle("Drink Animation")
-            .background(
-                LinearGradient(
-                    gradient: Gradient(colors: [Color.blue.opacity(0.2), Color.purple.opacity(0.2)]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-                .edgesIgnoringSafeArea(.all)
-            )
         }
-        .environmentObject(drinkViewModel) // Inject DrinkViewModel
     }
 }
 
-#Preview {
-    ContentView()
-        .environmentObject(GameViewModel()) // Provide GameViewModel for preview
-        .environmentObject(PurchaseManager()) // Provide PurchaseManager for preview
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .environmentObject(GameViewModel())
+            .environmentObject(PurchaseManager())
+    }
 }

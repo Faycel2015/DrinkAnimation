@@ -13,6 +13,12 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B8384C972D31E4340057BBAB /* DrinkAnimation */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			explicitFileTypes = {
+				"Resources/Localizations/ar.lproj/Localizable.strings (Arabic)" = text.plist.strings;
+				"Resources/Localizations/en.lproj/Localizable.strings (English)" = text.plist.strings;
+				"Resources/Localizations/es.lproj/Localizable.strings (Spanish)" = text.plist.strings;
+				"Resources/Localizations/fr.lproj/Localizable.strings (French)" = text.plist.strings;
+			};
 			path = DrinkAnimation;
 			sourceTree = "<group>";
 		};
@@ -90,7 +96,9 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
+				fr,
+				es,
+				ar,
 			);
 			mainGroup = B8384C8C2D31E4340057BBAB;
 			minimizedProjectReferenceProxies = 1;
@@ -130,6 +138,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -193,6 +202,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -255,6 +265,7 @@
 				DEVELOPMENT_TEAM = 3K7UP6P2LQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DrinkAnimation/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -284,6 +295,7 @@
 				DEVELOPMENT_TEAM = 3K7UP6P2LQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DrinkAnimation/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

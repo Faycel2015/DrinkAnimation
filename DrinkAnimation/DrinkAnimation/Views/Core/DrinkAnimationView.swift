@@ -14,21 +14,21 @@ struct DrinkAnimationView: View {
         VStack {
             ZStack {
                 CupView()
-                WaterView(fillLevel: .constant(CGFloat(viewModel.drink.fillLevel)), color: viewModel.drink.color)
+                WaterView(fillLevel: $viewModel.drink.fillLevel, color: viewModel.drink.color)
                     .mask(CupView())
                 BubblesView()
                 LiquidSplashView()
             }
-            .frame(width: 200, height: 300)
-            .transition(.scale)
+            .frame(maxWidth: .infinity, maxHeight: 300) // Dynamic frame size
+            .animation(.spring(), value: viewModel.drink.fillLevel) // Apply animation here
             
             Slider(value: $viewModel.drink.fillLevel, in: 0...1)
                 .padding()
             
-            ColorPickerView(selectedColor: $viewModel.drink.color)
+            // Use SwiftUI's built-in ColorPicker
+            ColorPicker("Drink Color", selection: $viewModel.drink.color)
                 .padding()
         }
         .padding()
-        .animation(.spring(), value: viewModel.drink.fillLevel)
     }
 }

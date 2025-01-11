@@ -5,7 +5,6 @@
 //  Created by FayTek on 1/11/25.
 //
 
-import Foundation
 import SwiftUI
 
 struct LeaderboardView: View {
@@ -15,7 +14,8 @@ struct LeaderboardView: View {
         VStack {
             Text("Your Score: \(gameViewModel.score)")
             Button("Share Score") {
-                if let rootVC = UIApplication.shared.windows.first?.rootViewController {
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let rootVC = windowScene.windows.first?.rootViewController {
                     ShareManager.shared.shareScore(gameViewModel.score, from: rootVC)
                 }
             }

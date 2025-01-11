@@ -9,11 +9,14 @@ import SwiftUI
 
 @main
 struct DrinkAnimationApp: App {
+    @StateObject private var purchaseManager = PurchaseManager()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(DrinkViewModel())
                 .environmentObject(GameViewModel())
+                .environmentObject(purchaseManager)
         }
     }
 }

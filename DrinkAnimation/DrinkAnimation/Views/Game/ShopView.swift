@@ -12,13 +12,13 @@ struct ShopView: View {
     @EnvironmentObject var purchaseManager: PurchaseManager
     
     var body: some View {
-        List(purchaseManager.products, id: \.productIdentifier) { product in
+        List(purchaseManager.products, id: \.id) { product in
             VStack(alignment: .leading) {
-                Text(product.localizedTitle)
+                Text(product.displayName)
                     .font(.headline)
-                Text(product.localizedDescription)
+                Text(product.description)
                     .font(.subheadline)
-                Button("Buy for \(product.price)") {
+                Button("Buy for \(product.displayPrice)") {
                     purchaseManager.purchaseProduct(product)
                 }
             }
