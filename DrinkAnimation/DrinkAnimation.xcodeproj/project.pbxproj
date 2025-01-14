@@ -10,15 +10,22 @@
 		B8384C952D31E4340057BBAB /* DrinkAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B8F605142D36B361002AC28A /* Exceptions for "DrinkAnimation" folder in "DrinkAnimation" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = B8384C942D31E4340057BBAB /* DrinkAnimation */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B8384C972D31E4340057BBAB /* DrinkAnimation */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			explicitFileTypes = {
-				"Resources/Localizations/ar.lproj/Localizable.strings (Arabic)" = text.plist.strings;
-				"Resources/Localizations/en.lproj/Localizable.strings (English)" = text.plist.strings;
-				"Resources/Localizations/es.lproj/Localizable.strings (Spanish)" = text.plist.strings;
-				"Resources/Localizations/fr.lproj/Localizable.strings (French)" = text.plist.strings;
-			};
+			exceptions = (
+				B8F605142D36B361002AC28A /* Exceptions for "DrinkAnimation" folder in "DrinkAnimation" target */,
+			);
 			path = DrinkAnimation;
 			sourceTree = "<group>";
 		};
@@ -99,6 +106,7 @@
 				fr,
 				es,
 				ar,
+				Base,
 			);
 			mainGroup = B8384C8C2D31E4340057BBAB;
 			minimizedProjectReferenceProxies = 1;
